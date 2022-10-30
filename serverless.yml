@@ -1,26 +1,12 @@
 # serverless.yml
 service: aws-ug-telegrambot-service
+
 package:
   individually: true
+
 plugins:
   - serverless-offline
   - serverless-esbuild
-custom:
-  serverless-offline:
-    port: 8000
-  esbuild: 
-    bundle: true
-provider:
-  name: aws
-  runtime: nodejs16.x
-  stage: ${opt:stage, 'dev'}
-  region: ap-south-1
-  memorySize: 512 # optional, in MB, default is 1024
-  timeout: 10 # optional, in seconds, default is 6
-  versionFunctions: false # optional, default is true
-  logRetentionInDays: 7
-  # tracing:
-    # lambda: true # optional, enables tracing for all functions (can be true (true equals 'Active') 'Active' or 'PassThrough')
 
 functions:
   botHandler:
@@ -38,9 +24,29 @@ functions:
     # provisionedConcurrency: 3 # optional, Count of provisioned lambda instances
     # reservedConcurrency: 5 # optional, reserved concurrency limit for this function. By default, AWS uses account concurrency limit
     # tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+  memorySize: 512 # optional, in MB, default is 1024
+  timeout: 10 # optional, in seconds, default is 6
+  versionFunctions: false # optional, default is true
+  logRetentionInDays: 7
+  role: ServiceLambdaRole
+  # tracing:
+  # lambda: true # optional, enables tracing for all functions (can be true (true equals 'Active') 'Active' or 'PassThrough')
+
+custom:
+  serverless-offline:
+    port: 8000
+  esbuild:
+    bundle: true
+
 resources:
   Resources:
-    awsugTelegramBotLambdaRole:
+    ServiceLambdaRole:
       Type: AWS::IAM::Role
       Properties:
         RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
@@ -51,9 +57,9 @@ resources:
               Principal:
                 Service:
                   - lambda.amazonaws.com
-              Action: 
-                  - sts:AssumeRole
-                  - sts:TagSession
+              Action:
+                - sts:AssumeRole
+                - sts:TagSession
         Policies:
           - PolicyName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
             PolicyDocument:
