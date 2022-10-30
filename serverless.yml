@@ -43,6 +43,7 @@ resources:
     awsugTelegramBotLambdaRole:
       Type: AWS::IAM::Role
       Properties:
+        Path: "/app/"
         RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
