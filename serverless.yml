@@ -40,7 +40,7 @@ functions:
     # tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
 resources:
   Resources:
-    serviceLambdaRole:
+    awsugTelegramBotLambdaRole:
       Type: AWS::IAM::Role
       Properties:
         RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
