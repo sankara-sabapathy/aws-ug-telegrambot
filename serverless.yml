@@ -44,6 +44,16 @@ resources:
       Type: AWS::IAM::Role
       Properties:
         RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: 
+                  - sts:AssumeRole
+                  - sts:TagSession
         Policies:
           - PolicyName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
             PolicyDocument:
