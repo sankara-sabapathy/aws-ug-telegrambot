@@ -12,7 +12,7 @@ app.post('/botHandler', async (req, res) => {
     try {
         const botToken = await new BotHandlerService().getSecretValue();
         const bot = new TelegramBotApi(botToken, { polling: false });
-        bot.sendMessage(
+        await bot.sendMessage(
             req.body.message.chat.id,
             'Bot under development.',
             {
