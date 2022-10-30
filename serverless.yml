@@ -56,7 +56,7 @@ resources:
                   - sts:AssumeRole
                   - sts:TagSession
         Policies:
-          - PolicyName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
+          - PolicyName: LambdaRolePolicy
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
