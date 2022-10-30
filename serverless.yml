@@ -38,51 +38,51 @@ functions:
     # provisionedConcurrency: 3 # optional, Count of provisioned lambda instances
     # reservedConcurrency: 5 # optional, reserved concurrency limit for this function. By default, AWS uses account concurrency limit
     # tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
-resources:
-  Resources:
-    awsugTelegramBotLambdaRole:
-      Type: AWS::IAM::Role
-      Properties:
-        Path: "/app/"
-        RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                  - lambda.amazonaws.com
-              Action: 
-                  - sts:AssumeRole
-                  - sts:TagSession
-        Policies:
-          - PolicyName: LambdaRolePolicy
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Resource:
-                    - "Fn::Join":
-                        - ":"
-                        - - "arn:aws:logs"
-                          - Ref: "AWS::Region"
-                          - Ref: "AWS::AccountId"
-                          - "log-group:/aws/lambda/*:*:*"
-                - Effect: Allow
-                  Action:
-                    - "s3:PutObject"
-                  Resource:
-                    - "*"
-                - Effect: Allow
-                  Action:
-                    - "cloudformation:DescribeStacks"
-                  Resource:
-                    - "*"
-                - Effect: Allow
-                  Action:
-                    - "secretsmanager:GetSecretValue"
-                  Resource: arn:aws:secretsmanager:${self:provider.region}:*:*
+# resources:
+#   Resources:
+#     awsugTelegramBotLambdaRole:
+#       Type: AWS::IAM::Role
+#       Properties:
+#         Path: "/app/"
+#         RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-lambdaRole
+#         AssumeRolePolicyDocument:
+#           Version: "2012-10-17"
+#           Statement:
+#             - Effect: Allow
+#               Principal:
+#                 Service:
+#                   - lambda.amazonaws.com
+#               Action: 
+#                   - sts:AssumeRole
+#                   - sts:TagSession
+#         Policies:
+#           - PolicyName: LambdaRolePolicy
+#             PolicyDocument:
+#               Version: "2012-10-17"
+#               Statement:
+#                 - Effect: Allow
+#                   Action:
+#                     - logs:CreateLogGroup
+#                     - logs:CreateLogStream
+#                     - logs:PutLogEvents
+#                   Resource:
+#                     - "Fn::Join":
+#                         - ":"
+#                         - - "arn:aws:logs"
+#                           - Ref: "AWS::Region"
+#                           - Ref: "AWS::AccountId"
+#                           - "log-group:/aws/lambda/*:*:*"
+#                 - Effect: Allow
+#                   Action:
+#                     - "s3:PutObject"
+#                   Resource:
+#                     - "*"
+#                 - Effect: Allow
+#                   Action:
+#                     - "cloudformation:DescribeStacks"
+#                   Resource:
+#                     - "*"
+#                 - Effect: Allow
+#                   Action:
+#                     - "secretsmanager:GetSecretValue"
+#                   Resource: arn:aws:secretsmanager:${self:provider.region}:*:*
