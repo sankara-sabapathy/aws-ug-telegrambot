@@ -12,11 +12,24 @@ app.post('/botHandler', async (req, res) => {
     try {
         const botToken = await new BotHandlerService().getSecretValue();
         const bot = new TelegramBotApi(botToken, { polling: false });
-        bot.sendMessage(req.body.message.chat.id,"Bot under development.");
+        bot.sendMessage(
+            req.body.message.chat.id,
+            'Bot under development.',
+            {
+                reply_markup:
+                {
+                    inline_keyboard: [
+                        [
+                            { text: 'Start', callback_data: '/start' }
+                        ]
+                    ]
+                }
+            }
+        )
     } catch (error) {
-        console.log("Error");
+        console.log("Error", error);
     } finally {
         // To avoid retries from telegram, always send 200 status.
-        res.status(200).json({"status": "success"});
+        res.status(200).json({ "status": "success" });
     }
 })
