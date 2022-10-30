@@ -49,5 +49,5 @@ jobs:
           role-duration-seconds: 1200
           role-session-name: MySessionName
 
-#       - name: serverless deploy
-#         run: serverless deploy --stage prod
+      - name: serverless deploy
+        run: serverless deploy --stage prod
