@@ -21,3 +21,30 @@ app.post('/botHandler', async (req, res) => {
         res.status(200).json({ "status": "success" });
     }
 })
+
+app.post('/setBotCommands', async (req, res) => {
+    try {
+        const botHandlerService = new BotHandlerService();
+        const botToken = await botHandlerService.getSecretValue();
+        const bot = new TelegramBotApi(botToken, { polling: false });
+        await bot.setMyCommands([
+            {
+                command: '/events',
+                description: 'List of ongoing AWS User group events'
+            },
+            {
+                command: '/list',
+                description: 'AWS User groups list in India'
+            },
+            {
+                command: '/resources',
+                description: 'Channels for learning'
+            },
+        ])
+    } catch (error) {
+        console.log("Error", error);
+    } finally {
+        // To avoid retries from telegram, always send 200 status.
+        res.status(200).json({ "status": "success" });
+    }
+})

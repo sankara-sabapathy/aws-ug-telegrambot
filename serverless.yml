@@ -17,6 +17,13 @@ functions:
           path: /botHandler
           method: post
           cors: true
+  setBotCommands:
+    handler: src/api-functions/botHandlerMain.handler # required, handler set in AWS Lambda
+    events:
+      - http:
+          path: /setBotCommands
+          method: post
+          cors: true
     # name: ${sls:stage}-lambdaName # optional, Deployed Lambda name
     # description: Description of what the lambda function does # optional, Description to publish to AWS
     # runtime: nodejs16.x # optional overwrite, default is provider runtime
