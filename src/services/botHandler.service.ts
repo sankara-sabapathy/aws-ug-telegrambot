@@ -43,7 +43,6 @@ export class BotHandlerService {
     }
 
     private getRequestType() {
-        console.log(this.request);
         if (this.request && this.request.message && this.request.message.text === '/start') {
             return 'START';
         }
@@ -54,11 +53,10 @@ export class BotHandlerService {
     }
 
     private sendWelcomeMessage() {
-        this.bot.sendMessage(this.request.message.chat.id, readFileSync('src/assets/Welcome.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname,'../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 
     private sendEvents() {
-        console.log('src/assets/Welcome.md');
-        this.bot.sendMessage(this.request.message.chat.id,readFileSync('src/assets/Events.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        this.bot.sendMessage(this.request.message.chat.id,readFileSync(path.join(__dirname,'../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
