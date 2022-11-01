@@ -54,11 +54,11 @@ export class BotHandlerService {
     }
 
     private sendWelcomeMessage() {
-        this.bot.sendMessage(this.request.message.chat.id, readFileSync('../assets/Welcome.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        this.bot.sendMessage(this.request.message.chat.id, readFileSync('src/assets/Welcome.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 
     private sendEvents() {
-        console.log('../assets/Welcome.md');
-        this.bot.sendMessage(this.request.message.chat.id,readFileSync('../assets/Events.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        console.log('src/assets/Welcome.md');
+        this.bot.sendMessage(this.request.message.chat.id,readFileSync('src/assets/Events.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
