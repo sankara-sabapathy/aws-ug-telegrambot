@@ -1,5 +1,6 @@
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import { readFileSync } from "fs";
+import path from "path";
 export class BotHandlerService {
     constructor() {
     }
@@ -53,10 +54,11 @@ export class BotHandlerService {
     }
 
     private sendWelcomeMessage() {
-        this.bot.sendMessage(this.request.message.chat.id, readFileSync('src/assets/Welcome.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.resolve(process.env.LAMBDA_TASK_ROOT ? process.env.LAMBDA_TASK_ROOT : '' , './src/assets/Welcome.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 
     private sendEvents() {
-        this.bot.sendMessage(this.request.message.chat.id, readFileSync('src/assets/Events.md', 'utf-8'), { parse_mode: 'MarkdownV2' });
+        console.log(path.resolve(process.env.LAMBDA_TASK_ROOT ? process.env.LAMBDA_TASK_ROOT : '' , './src/assets/Welcome.md'));
+        this.bot.sendMessage(this.request.message.chat.id,readFileSync(path.resolve(process.env.LAMBDA_TASK_ROOT ? process.env.LAMBDA_TASK_ROOT : '' , './src/assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
