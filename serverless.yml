@@ -1,8 +1,9 @@
 # serverless.yml
 service: aws-ug-telegrambot-service
 
-# package:
-#   individually: true
+package:
+  patterns:
+    - src/assets/*
 
 plugins:
   - serverless-offline
