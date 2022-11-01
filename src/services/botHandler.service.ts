@@ -57,6 +57,7 @@ export class BotHandlerService {
     }
 
     private sendEvents() {
+        console.log(path.join(__dirname,'../assets/Events.md'));
         this.bot.sendMessage(this.request.message.chat.id,readFileSync(path.join(__dirname,'../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
