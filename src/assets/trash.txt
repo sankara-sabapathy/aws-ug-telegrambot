@@ -1,0 +1,10 @@
+            {
+                reply_markup:
+                {
+                    inline_keyboard: [
+                        [
+                            { text: 'Start', callback_data: '/start' }
+                        ]
+                    ]
+                }
+            }

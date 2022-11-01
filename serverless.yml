@@ -10,7 +10,7 @@ plugins:
 
 functions:
   botHandler:
-    handler: src/functions/botHandlerMain.handler # required, handler set in AWS Lambda
+    handler: src/api-functions/botHandlerMain.handler # required, handler set in AWS Lambda
     events:
       - http:
           path: /botHandler
