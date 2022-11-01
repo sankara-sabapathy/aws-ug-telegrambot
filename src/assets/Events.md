@@ -12,6 +12,6 @@
 2\. *AWS Community Day India 2022*
 
         \- Mode: Online
-        \- Description: AWS User Groups in India are back with a bang to host the most awaited event, AWS Community Day India 2022, unveiling success stories, use cases & much more from industry leaders.
+        \- Description: AWS User Groups in India are back with a bang to host the most awaited event, AWS Community Day India 2022, unveiling success stories, use cases & much more from industry leaders
         \- When: 11th & 12th Nov 2022
         \- Register [here](https://awscommunityday.in/)
