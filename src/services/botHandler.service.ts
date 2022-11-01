@@ -31,13 +31,13 @@ export class BotHandlerService {
         const requestType = this.getRequestType();
         switch (requestType) {
             case 'START':
-                this.sendWelcomeMessage();
+                await this.sendWelcomeMessage();
                 break;
             case 'EVENTS':
-                this.sendEvents();
+                await this.sendEvents();
                 break;
             default:
-                this.sendWelcomeMessage();
+                await this.sendWelcomeMessage();
                 break;
         }
     }
@@ -52,12 +52,12 @@ export class BotHandlerService {
         return undefined;
     }
 
-    private sendWelcomeMessage() {
-        this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname,'../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
+    private async sendWelcomeMessage() {
+        await this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname, '../assets/Welcome.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 
-    private sendEvents() {
-        console.log(readFileSync(path.join(__dirname,'../assets/Events.md'),'utf-8'));
-        this.bot.sendMessage(this.request.message.chat.id,'test', { parse_mode: 'MarkdownV2' });
+    private async sendEvents() {
+        console.log();
+        await this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname, '../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
