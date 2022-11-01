@@ -36,6 +36,9 @@ export class BotHandlerService {
             case 'EVENTS':
                 await this.sendEvents();
                 break;
+            case 'UGLIST':
+                await this.sendUserGroupList();
+                break;
             default:
                 await this.sendWelcomeMessage();
                 break;
@@ -49,6 +52,9 @@ export class BotHandlerService {
         if (this.request && this.request.message && this.request.message.text === '/events') {
             return 'EVENTS';
         }
+        if (this.request && this.request.message && this.request.message.text === '/list') {
+            return 'UGLIST';
+        }
         return undefined;
     }
 
@@ -57,7 +63,10 @@ export class BotHandlerService {
     }
 
     private async sendEvents() {
-        console.log();
         await this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname, '../assets/Events.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
+    }
+    
+    private async sendUserGroupList() {
+        await this.bot.sendMessage(this.request.message.chat.id, readFileSync(path.join(__dirname, '../assets/UserGroupsList.md'), 'utf-8'), { parse_mode: 'MarkdownV2' });
     }
 }
