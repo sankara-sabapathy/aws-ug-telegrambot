@@ -11,7 +11,8 @@ module.exports.handler = serverless(app);
 app.post('/botHandler', async (req, res) => {
     try {
         const botHandlerService = new BotHandlerService();
-        const botToken = await botHandlerService.getSecretValue();
+        const botToken = process.env.BOT_TOKEN ? process.env.BOT_TOKEN : "" ; 
+        //await botHandlerService.getSecretValue(); commenting not to pay for secrets manager :-)
         const bot = new TelegramBotApi(botToken, { polling: false });
         await botHandlerService.handleNewRequest(req.body,bot);
     } catch (error) {
